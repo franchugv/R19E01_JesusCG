@@ -38,6 +38,7 @@ namespace R19E01_JesusCG
             // RECURSOS
             Vehiculo coche;
             float precioCoche = 0;
+            string marca = "";
 
             // string mensajeError = "";
             // bool esValido;
@@ -45,10 +46,10 @@ namespace R19E01_JesusCG
             coche = new Vehiculo();
 
             // CAPTURAR MARCA
-
+            CaptarMarca(coche, ref marca);
 
             //CAPTAR MODELO
-
+            
 
             // CAPTAR PRECIO
 
@@ -107,5 +108,52 @@ namespace R19E01_JesusCG
                 }
             } while (!esValido);
         }
+
+        private static void CaptarMarca(Vehiculo coche, ref string Marca)
+        {
+            // RECURSOS
+            string mensajeError = "";
+            bool esValido;
+
+            // ENTRADA
+            do
+            {
+                // RESET
+                esValido = true; // Se supone que no hay errores.
+
+                Console.Write("Introduzca el precio del vehiculo: ");
+                try
+                {
+
+
+                    // Asignar a la propiedad objeto
+                    coche.Marca = Marca;
+                }
+                catch (FormatException formato)
+                {
+                    esValido = false;
+                    mensajeError = "ERROR: No se ha introducido un número";
+                }
+                catch (OverflowException tipo)
+                {
+                    esValido = false;
+                    mensajeError = "ERROR: Se ha sobrepasado el límite del tipo float";
+                }
+                catch (Exception objeto) // Todas las demás excepciones
+                {
+                    esValido = false;
+                    mensajeError = $"ERROR: {objeto.Message}";
+                }
+                finally
+                {
+                    if (!esValido)
+                    {
+                        Console.WriteLine($"{mensajeError}");
+                    }
+                }
+            } while (!esValido);
+        }
+
+
     }
 }
