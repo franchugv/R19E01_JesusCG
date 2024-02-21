@@ -39,7 +39,9 @@ namespace R19E01_JesusCG
             Vehiculo coche;
             float precioCoche = 0;
 
-            bool esValido;
+            // string mensajeError = "";
+            // bool esValido;
+
             coche = new Vehiculo();
 
             // CAPTURAR MARCA
@@ -50,6 +52,24 @@ namespace R19E01_JesusCG
 
             // CAPTAR PRECIO
 
+            // esValido = CaptarPrecio(coche, ref precioCoche, ref mensajeError);
+            CaptarPrecio(coche, ref precioCoche);
+
+            return coche;
+
+        }
+
+        // Devuelve 4 datos 
+        // private static bool CaptarPrecio(Vehiculo coche, ref float precioCoche, ref string mensajeError)
+        // private static void CaptarPrecio(Vehiculo coche, ref float precioCoche, ref string mensajeError)
+
+        private static void CaptarPrecio(Vehiculo coche, ref float precioCoche)
+        {
+            // RECURSOS
+            string mensajeError = "";
+            bool esValido;
+
+            // ENTRADA
             do
             {
                 // RESET
@@ -57,32 +77,35 @@ namespace R19E01_JesusCG
 
                 Console.Write("Introduzca el precio del vehiculo: ");
                 try
-                { 
-                precioCoche = Convert.ToSingle(Console.ReadLine());
+                {
+                    precioCoche = Convert.ToSingle(Console.ReadLine());
 
-                // Asignar a la propiedad objeto
-                coche.PrecioContado = precioCoche;
+                    // Asignar a la propiedad objeto
+                    coche.PrecioContado = precioCoche;
                 }
-                catch(FormatException formato)
+                catch (FormatException formato)
                 {
-                    Console.WriteLine("ERROR: No se ha introducido un número");
+                    esValido = false;
+                    mensajeError = "ERROR: No se ha introducido un número";
                 }
-                catch(OverflowException tipo)
+                catch (OverflowException tipo)
                 {
-                    Console.WriteLine("ERROR: Se ha sobrepasado el límite del tipo float");
+                    esValido = false;
+                    mensajeError = "ERROR: Se ha sobrepasado el límite del tipo float";
                 }
-                catch(Exception objeto) // Todas las demás excepciones
+                catch (Exception objeto) // Todas las demás excepciones
                 {
-                    Console.WriteLine($"ERROR: {objeto.Message}");
+                    esValido = false;
+                    mensajeError = $"ERROR: {objeto.Message}";
+                }
+                finally
+                {
+                    if (!esValido)
+                    {
+                        Console.WriteLine($"{mensajeError}");
+                    }
                 }
             } while (!esValido);
-
-
-
-            // SALIDA
-
-            return coche;
-
         }
     }
 }
