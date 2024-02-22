@@ -116,7 +116,6 @@ namespace R19E01_JesusCG
             // RECURSOS
             string mensajeError = "";
             bool esValido;
-            string mark = "";
 
             // ENTRADA
             do
@@ -130,13 +129,19 @@ namespace R19E01_JesusCG
 
 
                     // Asignar a la propiedad objeto
-                    coche.Marca = mark;
+                    coche.Marca = Console.ReadLine();
                 }
               
-                catch (OverflowException tipo)
+                catch (LongitudMaximaException tipo)
                 {
                     esValido = false;
-                    mensajeError = "ERROR: Se ha sobrepasado el límite del tipo float";
+                    mensajeError = "ERROR: Se ha sobrepasado el límite de la marca";
+                }
+
+                catch (LongitudMinimaException tipo)
+                {
+                    esValido = false;
+                    mensajeError = "ERROR: Es menor al límite de la marca";
                 }
                 catch (Exception objeto) // Todas las demás excepciones
                 {

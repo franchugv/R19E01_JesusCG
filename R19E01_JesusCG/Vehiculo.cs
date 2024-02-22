@@ -249,9 +249,9 @@ namespace R19E01_JesusCG
         private void ValidarCadena(string cadena, int tamMin, int tamMax)
         {
             // Excepción personalizada
-            if (String.IsNullOrEmpty(cadena)) throw new CadenaVaciaException("");
-            if (cadena.Length < tamMin) throw new Exception($"Longitud inferior a {tamMin} caracteres");
-            if (cadena.Length > tamMax) throw new Exception($"Longitud superior a {tamMax} caracteres");
+            if (String.IsNullOrEmpty(cadena)) throw new CadenaVaciaException();
+            if (cadena.Length < tamMin) throw new LongitudMinimaException();
+            if (cadena.Length > tamMax) throw new LongitudMinimaException();
 
             // TODO: Comprobación de si tiene caracteres especiales
             
@@ -322,4 +322,16 @@ namespace R19E01_JesusCG
         public CadenaVaciaException(string mensaje) : base(mensaje){}
     }
 
+    public class LongitudMinimaException : Exception
+    {
+        public LongitudMinimaException() : base("Longitud inferior a la permitida") {}
+
+        public LongitudMinimaException(string Mensaje) : base(Mensaje) {}
+    }
+
+    public class LongitudMaximaException : Exception
+    {
+        public LongitudMaximaException() : base("Longitud mayor a la permitida") { }
+        public LongitudMaximaException(string Mensaje) : base(Mensaje) { }
+    }
 }
