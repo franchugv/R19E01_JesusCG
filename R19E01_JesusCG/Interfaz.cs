@@ -39,6 +39,7 @@ namespace R19E01_JesusCG
             Vehiculo coche;
             float precioCoche = 0;
             string marca = "";
+            string modelo = "";
 
             // string mensajeError = "";
             // bool esValido;
@@ -46,15 +47,15 @@ namespace R19E01_JesusCG
             coche = new Vehiculo();
 
             // CAPTURAR MARCA
-            CaptarMarca(coche, ref marca);
+            CaptarMarca(coche);
 
             //CAPTAR MODELO
-            
+            CaptarModelo(coche);
 
             // CAPTAR PRECIO
 
             // esValido = CaptarPrecio(coche, ref precioCoche, ref mensajeError);
-            CaptarPrecio(coche, ref precioCoche);
+            CaptarPrecio(coche);
 
             return coche;
 
@@ -64,11 +65,12 @@ namespace R19E01_JesusCG
         // private static bool CaptarPrecio(Vehiculo coche, ref float precioCoche, ref string mensajeError)
         // private static void CaptarPrecio(Vehiculo coche, ref float precioCoche, ref string mensajeError)
 
-        private static void CaptarPrecio(Vehiculo coche, ref float precioCoche)
+        private static void CaptarPrecio(Vehiculo coche)
         {
             // RECURSOS
             string mensajeError = "";
             bool esValido;
+            float precioCoche = 0;
 
             // ENTRADA
             do
@@ -109,11 +111,12 @@ namespace R19E01_JesusCG
             } while (!esValido);
         }
 
-        private static void CaptarMarca(Vehiculo coche, ref string Marca)
+        private static void CaptarMarca(Vehiculo coche)
         {
             // RECURSOS
             string mensajeError = "";
             bool esValido;
+            string mark = "";
 
             // ENTRADA
             do
@@ -121,13 +124,60 @@ namespace R19E01_JesusCG
                 // RESET
                 esValido = true; // Se supone que no hay errores.
 
-                Console.Write("Introduzca el precio del vehiculo: ");
+                Console.Write("Introduzca la marca del vehiculo: ");
                 try
                 {
 
 
                     // Asignar a la propiedad objeto
-                    coche.Marca = Marca;
+                    coche.Marca = mark;
+                }
+              
+                catch (OverflowException tipo)
+                {
+                    esValido = false;
+                    mensajeError = "ERROR: Se ha sobrepasado el límite del tipo float";
+                }
+                catch (Exception objeto) // Todas las demás excepciones
+                {
+                    esValido = false;
+                    mensajeError = $"ERROR: {objeto.Message}";
+                }
+                finally
+                {
+                    if (!esValido)
+                    {
+                        Console.WriteLine($"{mensajeError}");
+                    }
+                }
+            } while (!esValido);
+        }
+
+        private static void CaptarModelo(Vehiculo coche)
+        {
+            // RECURSOS
+            string mensajeError = "";
+            bool esValido;
+            string model = "";
+
+            // ENTRADA
+            do
+            {
+                // RESET
+                esValido = true; // Se supone que no hay errores.
+
+                Console.Write("Introduzca el modelo del vehiculo: ");
+                try
+                {
+
+
+                    // Asignar a la propiedad objeto
+                    coche.Marca = model;
+                }
+                catch (CadenaVaciaException formato)
+                {
+                    esValido = false;
+                    mensajeError = formato.Message;
                 }
                 catch (FormatException formato)
                 {
@@ -153,7 +203,6 @@ namespace R19E01_JesusCG
                 }
             } while (!esValido);
         }
-
 
     }
 }

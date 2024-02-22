@@ -248,7 +248,8 @@ namespace R19E01_JesusCG
         /// <exception cref="Exception">Errores de Validación</exception>
         private void ValidarCadena(string cadena, int tamMin, int tamMax)
         {
-            if (String.IsNullOrEmpty(cadena)) throw new Exception("Cadena vacía");
+            // Excepción personalizada
+            if (String.IsNullOrEmpty(cadena)) throw new CadenaVaciaException("");
             if (cadena.Length < tamMin) throw new Exception($"Longitud inferior a {tamMin} caracteres");
             if (cadena.Length > tamMax) throw new Exception($"Longitud superior a {tamMax} caracteres");
 
@@ -308,4 +309,17 @@ namespace R19E01_JesusCG
         }
 
     }
+
+
+
+    // EXCEPCIONES PERSONALIZADAS PARA LA CLASE VEHÍCULO
+    public class CadenaVaciaException : Exception
+    {
+        // Constructores para la clase
+
+        public CadenaVaciaException() : base("Cadena Vacía"){}
+        // Constructor por parametro
+        public CadenaVaciaException(string mensaje) : base(mensaje){}
+    }
+
 }
