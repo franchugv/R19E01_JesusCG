@@ -31,23 +31,7 @@
             // Proceso: Carga de los coches en la lista
             LogicaNegocio.CargarListaVehiculos(listaVehiculos);
             
-            do
-            {
-                // Mostrar Menú Principal
-
-                // Leer Opción
-
-                // Acción a realizar
-                switch (opcionMenu)
-                {
-                    case 1:
-                        Interfaz.MostrarListadoCompleto(listaVehiculos);
-                        break;
-                    case 2:
-                        break;
-                }
-
-            }while (opcionMenu != 0);
+        
 
         }
     }

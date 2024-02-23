@@ -37,9 +37,7 @@ namespace R19E01_JesusCG
         {
             // RECURSOS
             Vehiculo coche;
-            float precioCoche = 0;
-            string marca = "";
-            string modelo = "";
+
 
             // string mensajeError = "";
             // bool esValido;
@@ -89,7 +87,18 @@ namespace R19E01_JesusCG
                 catch (FormatException formato)
                 {
                     esValido = false;
-                    mensajeError = "ERROR: No se ha introducido un número";
+                    mensajeError = "ERROR:" + formato.Message;
+                }
+                catch (LongitudMaximaException tipo)
+                {
+                    esValido = false;
+                    mensajeError = "ERROR:" + tipo.Message;
+                }
+
+                catch (LongitudMinimaException tipo)
+                {
+                    esValido = false;
+                    mensajeError = "ERROR:" + tipo.Message;
                 }
                 catch (OverflowException tipo)
                 {
@@ -131,17 +140,11 @@ namespace R19E01_JesusCG
                     // Asignar a la propiedad objeto
                     coche.Marca = Console.ReadLine();
                 }
-              
-                catch (LongitudMaximaException tipo)
-                {
-                    esValido = false;
-                    mensajeError = "ERROR: Se ha sobrepasado el límite de la marca";
-                }
 
-                catch (LongitudMinimaException tipo)
+                catch (CadenaVaciaException formato)
                 {
                     esValido = false;
-                    mensajeError = "ERROR: Es menor al límite de la marca";
+                    mensajeError = formato.Message;
                 }
                 catch (Exception objeto) // Todas las demás excepciones
                 {
@@ -163,7 +166,6 @@ namespace R19E01_JesusCG
             // RECURSOS
             string mensajeError = "";
             bool esValido;
-            string model = "";
 
             // ENTRADA
             do
@@ -177,22 +179,12 @@ namespace R19E01_JesusCG
 
 
                     // Asignar a la propiedad objeto
-                    coche.Marca = model;
+                    coche.Marca = Console.ReadLine();
                 }
                 catch (CadenaVaciaException formato)
                 {
                     esValido = false;
                     mensajeError = formato.Message;
-                }
-                catch (FormatException formato)
-                {
-                    esValido = false;
-                    mensajeError = "ERROR: No se ha introducido un número";
-                }
-                catch (OverflowException tipo)
-                {
-                    esValido = false;
-                    mensajeError = "ERROR: Se ha sobrepasado el límite del tipo float";
                 }
                 catch (Exception objeto) // Todas las demás excepciones
                 {

@@ -251,7 +251,7 @@ namespace R19E01_JesusCG
             // Excepción personalizada
             if (String.IsNullOrEmpty(cadena)) throw new CadenaVaciaException();
             if (cadena.Length < tamMin) throw new LongitudMinimaException();
-            if (cadena.Length > tamMax) throw new LongitudMinimaException();
+            if (cadena.Length > tamMax) throw new LongitudMaximaException(tamMax);
 
             // TODO: Comprobación de si tiene caracteres especiales
             
@@ -264,8 +264,8 @@ namespace R19E01_JesusCG
         /// <exception cref="Exception">Errores del precio del coche</exception>
         private void ValidarPrecio(float valor)
         {
-            if (valor < PRECIO_MIN) throw new Exception($"El precio del vehículo tiene que ser superior a {PRECIO_MIN} Euros");
-            if (valor > PRECIO_MAX) throw new Exception($"El precio del vehículo tiene que ser inferior a {PRECIO_MAX} Euros");
+            if (valor < PRECIO_MIN) throw new LongitudMinimaException();
+            if (valor > PRECIO_MAX) throw new LongitudMaximaException();
         }
 
         /// <summary>
@@ -333,5 +333,9 @@ namespace R19E01_JesusCG
     {
         public LongitudMaximaException() : base("Longitud mayor a la permitida") { }
         public LongitudMaximaException(string Mensaje) : base(Mensaje) { }
+
+        public LongitudMaximaException(int maximo) : base($"Longitud mayor a {maximo} la permitida"){}
     }
+
+    
 }
